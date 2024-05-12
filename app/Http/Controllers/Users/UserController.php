@@ -14,7 +14,7 @@ class UserController extends Controller
     ) {
     }
 
-    public function index(Request $request) {
+    public function index() {
         $users = $this->service->getAllUsers();
 
         return $users;

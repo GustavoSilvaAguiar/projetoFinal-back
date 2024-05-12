@@ -14,7 +14,7 @@ class UserEloquentORM implements UserRepositoryInterface
 
     public function getAllUsers(): array
     {
-        return $this->model->toArray();
+        return $this->model->get()->toArray();
     }
     /* public function getUser(string $id): stdClass
     {
