@@ -2,7 +2,9 @@
 
 namespace App\Repositories;
 
+use App\DTO\UsuarioDTO;
 use App\Models\Usuario;
+use stdClass;
 
 class UserEloquentORM implements UserRepositoryInterface
 {
@@ -16,8 +18,18 @@ class UserEloquentORM implements UserRepositoryInterface
     {
         return $this->model->get()->toArray();
     }
-    /* public function getUser(string $id): stdClass
+    public function getUser(string $id): stdClass | null
     {
-        return '';
-    } */
+        //dd($id);
+        $response = (object) $this->model->find($id)->toArray();
+        //dd($response);
+        return $response;
+    }
+
+    public function postUser(UsuarioDTO $dto)
+    {
+        $response = $this->model->create((array) $dto);
+
+        return (object) $response->toArray();
+    }
 }

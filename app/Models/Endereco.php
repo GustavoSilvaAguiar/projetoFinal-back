@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Usuario extends Model
+class Endereco extends Model
 {
     use HasFactory;
 
-    /* public function enderecos() {
-        return $this->hasMany(Endereco::class, 'idendereco');
+    /* public function usuarios()
+    {
+        return $this->belongsTo(Usuario::class, 'idendereco');
     } */
 }
