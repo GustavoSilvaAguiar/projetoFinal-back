@@ -9,5 +9,6 @@ interface UserRepositoryInterface
 {
     public function getAllUsers(): array;
     public function getUser(string $id): stdClass | null;
-    public function postUser(UsuarioDTO $dto);
+    public function postUser(UsuarioDTO $dto): stdClass;
+    public function putUser(UsuarioDTO $dto): stdClass | null;
 }

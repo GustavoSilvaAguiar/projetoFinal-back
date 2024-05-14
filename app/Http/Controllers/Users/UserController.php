@@ -34,4 +34,10 @@ class UserController extends Controller
 
         return $response;
     }
+
+    public function putUser(UsuarioPostUpdateRequest $request) {
+        $response = $this->service->putUser(UsuarioDTO::makeFromRequest($request));
+
+        return $response;
+    }
 }
