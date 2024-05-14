@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UsuarioPostUpdateRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UsuarioPostUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,9 +22,22 @@ class UsuarioPostUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
+        $rules = [
+            'nome' => 'required|min:3|max:70',
+            'cpf' => 'required|min:11|max:14'
         ];
+
+        if ($this->method() === 'PUT' || $this->method() === 'PATCH') {
+            $rules['cpf'] = [
+                'required', // 'nullable',
+                'min:11',
+                'max:14',
+                // "unique:supports,subject,{$this->id},id",
+                Rule::unique('usuarios')->ignore($this->support ?? $this->id),
+            ];
+        }
+        
+        return $rules;
     }
     
 }

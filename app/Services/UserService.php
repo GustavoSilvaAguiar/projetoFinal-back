@@ -24,7 +24,11 @@ class UserService
         return $this->repository->getUser($id);
     }
 
-    public function postUser(UsuarioDTO $dto) {
+    public function postUser(UsuarioDTO $dto): stdClass | null {
         return $this->repository->postUser($dto);
+    }
+
+    public function putUser(UsuarioDTO $dto): stdClass {
+        return $this->repository->putUser($dto);
     }
 }

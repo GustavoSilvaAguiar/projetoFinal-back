@@ -26,10 +26,23 @@ class UserEloquentORM implements UserRepositoryInterface
         return $response;
     }
 
-    public function postUser(UsuarioDTO $dto)
+    public function postUser(UsuarioDTO $dto): stdClass
     {
         $response = $this->model->create((array) $dto);
 
         return (object) $response->toArray();
+    }
+
+    public function putUser(UsuarioDTO $dto): stdClass | null
+    {
+        $user = $this->model->find($dto->id);
+        if(!$user) {
+            return null;
+        }
+
+        $user->update((array) $dto);
+        //$response = $this->model->update((array) $dto);
+
+        return (object) $user->toArray();
     }
 }

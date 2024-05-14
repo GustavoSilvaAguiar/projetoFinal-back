@@ -9,6 +9,15 @@ class Usuario extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nome',
+        'cpf',
+        'idendereco',
+        'idcontato'
+    ];
+
+    public $timestamps = false;
+
     /* public function enderecos() {
         return $this->hasMany(Endereco::class, 'idendereco');
     } */
