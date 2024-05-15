@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ContatoPostUpdateRequest;
 use App\Http\Requests\EnderecoPostUpdateRequest;
 use App\Http\Requests\UsuarioPostUpdateRequest;
+use App\Models\Usuario;
 use App\Services\UserService;
 use Illuminate\Http\Client\Request;
 
@@ -20,9 +21,11 @@ class UserController extends Controller
     ) {
     }
 
-    public function index()
+    public function index(?Request $request)
     {
+        dd($request);
         $users = $this->service->getAllUsers();
+        $users = Usuario::paginate($perPage = 20);
 
         return $users;
     }
