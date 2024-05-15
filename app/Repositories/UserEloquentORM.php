@@ -2,7 +2,11 @@
 
 namespace App\Repositories;
 
+use App\DTO\ContatoDTO;
+use App\DTO\EnderecoDTO;
 use App\DTO\UsuarioDTO;
+use App\Models\Contato;
+use App\Models\Endereco;
 use App\Models\Usuario;
 use stdClass;
 
@@ -10,25 +14,43 @@ class UserEloquentORM implements UserRepositoryInterface
 {
 
     public function __construct(
-        protected Usuario $model
+        protected Usuario $model,
+        protected Endereco $enderecoModel,
+        protected Contato $contatoModel
     ) {
     }
 
     public function getAllUsers(): array
     {
-        return $this->model->get()->toArray();
+        return $this->model->with('endereco', 'contato')->get()->toArray();
+        //return $this->model->leftJoin('enderecos', 'usuarios.idendereco', '=', 'enderecos.id')->get()->toArray();
     }
     public function getUser(string $id): stdClass | null
     {
-        //dd($id);
-        $response = (object) $this->model->find($id)->toArray();
-        //dd($response);
+        $response = (object) $this->model->with('endereco', 'contato')->find($id)->toArray();
         return $response;
     }
 
     public function postUser(UsuarioDTO $dto): stdClass
     {
         $response = $this->model->create((array) $dto);
+
+        return (object) $response->toArray();
+    }
+
+    public function postUserComplete(UsuarioDTO $dto, EnderecoDTO $enderecoDTO, ContatoDTO $contatoDTO): stdClass
+    {
+        $response = $this->model->create((array) $dto);
+
+        $endereco = $this->enderecoModel->create((array) $enderecoDTO);
+
+        $contato = $this->contatoModel->create((array) $contatoDTO);
+
+        $response->endereco()->associate($endereco);
+
+        $response->contato()->associate($contato);
+
+        $response->save();
 
         return (object) $response->toArray();
     }
