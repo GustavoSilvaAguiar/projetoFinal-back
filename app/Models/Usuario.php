@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Usuario extends Model
 {
@@ -11,14 +13,16 @@ class Usuario extends Model
 
     protected $fillable = [
         'nome',
-        'cpf',
-        'idendereco',
-        'idcontato'
+        'cpf'
     ];
 
     public $timestamps = false;
 
-    /* public function enderecos() {
-        return $this->hasMany(Endereco::class, 'idendereco');
-    } */
+    public function endereco(): BelongsTo {
+        return $this->BelongsTo(Endereco::class, 'idendereco');
+    }
+
+    public function contato(): BelongsTo {
+        return $this->belongsTo(Contato::class, 'idcontato');
+    }
 }

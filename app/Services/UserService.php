@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\DTO\ContatoDTO;
+use App\DTO\EnderecoDTO;
 use App\DTO\UsuarioDTO;
 use App\Repositories\UserRepositoryInterface;
 use stdClass;
@@ -20,7 +22,6 @@ class UserService
 
     public function getUser(string $id): stdClass | null
     {
-        //dd($id);
         return $this->repository->getUser($id);
     }
 
@@ -30,5 +31,9 @@ class UserService
 
     public function putUser(UsuarioDTO $dto): stdClass {
         return $this->repository->putUser($dto);
+    }
+
+    public function postUserComplete(UsuarioDTO $dto, EnderecoDTO $enderecoDTO, ContatoDTO $contatoDTO): stdClass {
+        return $this->repository->postUserComplete($dto, $enderecoDTO, $contatoDTO);
     }
 }
