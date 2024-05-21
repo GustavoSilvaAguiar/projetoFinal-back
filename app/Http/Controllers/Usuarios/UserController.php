@@ -11,7 +11,7 @@ use App\Http\Requests\EnderecoPostUpdateRequest;
 use App\Http\Requests\UsuarioPostUpdateRequest;
 use App\Models\Usuario;
 use App\Services\UserService;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -21,11 +21,11 @@ class UserController extends Controller
     ) {
     }
 
-    public function index(?Request $request)
+    public function index(Request $request)
     {
-        dd($request);
-        $users = $this->service->getAllUsers();
-        $users = Usuario::paginate($perPage = 20);
+        //return $request;
+        $users = $this->service->getAllUsers($request);
+        //$users = Usuario::paginate($perPage = 20);
 
         return $users;
     }

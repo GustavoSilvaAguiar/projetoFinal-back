@@ -6,6 +6,8 @@ use App\DTO\ContatoDTO;
 use App\DTO\EnderecoDTO;
 use App\DTO\UsuarioDTO;
 use App\Repositories\UserRepositoryInterface;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Http\Request;
 use stdClass;
 
 class UserService
@@ -15,9 +17,9 @@ class UserService
     ) {
     }
 
-    public function getAllUsers(): array
+    public function getAllUsers(Request $request): LengthAwarePaginator
     {
-        return $this->repository->getAllUsers();
+        return $this->repository->getAllUsers($request);
     }
 
     public function getUser(string $id): stdClass | null

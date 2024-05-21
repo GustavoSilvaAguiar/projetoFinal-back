@@ -8,6 +8,8 @@ use App\DTO\UsuarioDTO;
 use App\Models\Contato;
 use App\Models\Endereco;
 use App\Models\Usuario;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Http\Request;
 use stdClass;
 
 class UserEloquentORM implements UserRepositoryInterface
@@ -20,9 +22,10 @@ class UserEloquentORM implements UserRepositoryInterface
     ) {
     }
 
-    public function getAllUsers(): array
+    public function getAllUsers(Request $request): LengthAwarePaginator//: array
     {
-        return $this->model->with('endereco', 'contato')->get()->toArray();
+        //$filter = $request?->filter ? $request->filter : '';
+        return $this->model->with('endereco', 'contato')->paginate();
         //return $this->model->leftJoin('enderecos', 'usuarios.idendereco', '=', 'enderecos.id')->get()->toArray();
     }
     public function getUser(string $id): stdClass | null
