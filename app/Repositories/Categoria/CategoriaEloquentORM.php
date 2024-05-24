@@ -22,10 +22,26 @@ class CategoriaEloquentORM implements CategoriaRepositoryInterface
 
     public function postCategoria(CategoriaDTO $dto): stdClass | null
     {
-        $catagoriaImgName = time() . '_' . $dto->img->getClientFilename();
+        //$this->model->img = $dto->img->file('');
+        //$catagoriaImgName = time() . '_' . $dto->img->getClientOriginalName();
         
-        $reponse = $this->model->create((array) $dto);
+        $response = $this->model->create([
+            'nome'=> $dto->nome,
+            'idusuario'=> $dto->idusuario
+        ]);
 
-        return (object) $reponse->toArray();
+        if($dto->img) {
+            $this->saveCategoriaPicture($response, $dto->img);
+        }
+
+        return (object) $response->toArray();
+    }
+
+    public function saveCategoriaPicture( $categoria, $img) {
+        $fileName = 'categoria_picture_' . $categoria->id . '.' . $img->extension();
+        $path = $img->storeAs('public/profile_pictures', $fileName);
+
+        // Atualizar o caminho da imagem no banco de dados
+        $categoria->update(['profile_picture' => $path]);
     }
 }

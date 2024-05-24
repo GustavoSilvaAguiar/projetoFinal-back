@@ -3,9 +3,11 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Categorias\CategoriaController;
 use App\Http\Controllers\Enderecos\EnderecoController;
+use App\Http\Controllers\Estoque\EstoqueController;
+use App\Http\Controllers\Fornecedores\FornecedorController;
+use App\Http\Controllers\Marcas\MarcaController;
 use App\Http\Controllers\Produtos\ProdutoController;
 use App\Http\Controllers\Usuarios\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login']);
@@ -31,4 +33,19 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     //Produtos
     Route::get('/produtos', [ProdutoController::class, 'getAllProdutos']);
+    Route::get('/produtos/nopage', [ProdutoController::class, 'getAllProdutosNoPage']);
+    Route::post('/produtos', [ProdutoController::class, 'postProduto']);
+    Route::put('/produtos', [ProdutoController::class, 'putProduto']);
+
+    //Marcas
+    Route::get('/marcas', [MarcaController::class, 'getAllMarcas']);
+    Route::get('/marcasPaginado', [MarcaController::class, 'getAllMarcasPaginado']);
+
+    //Estoque
+    Route::get('/estoque', [EstoqueController::class, 'getEstoque']);
+    Route::post('/estoque', [EstoqueController::class, 'postEstoque']);
+
+    //Fornecedores
+    Route::get('/fornecedores', [FornecedorController::class, 'getAllFornecedores']);
+    Route::get('/fornecedores/paginado', [FornecedorController::class, 'getAllFornecedoresPaginado']);
 });

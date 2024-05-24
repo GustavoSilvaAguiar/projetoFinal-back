@@ -6,6 +6,12 @@ use App\Repositories\{UserRepositoryInterface, UserEloquentORM};
 use App\Repositories\Categoria\CategoriaEloquentORM;
 use App\Repositories\Categoria\CategoriaRepositoryInterface;
 use App\Repositories\Endereco\{EnderecoRepositoryInterface, EnderecoEloquentORM};
+use App\Repositories\Estoque\EstoqueEloquentORM;
+use App\Repositories\Estoque\EstoqueRepositoryInterface;
+use App\Repositories\Fornecedor\FornecedorEloquentORM;
+use App\Repositories\Fornecedor\FornecedorRepositoryInterface;
+use App\Repositories\Marca\MarcaEloquentORM;
+use App\Repositories\Marca\MarcaRepositoryInterface;
 use App\Repositories\Produto\ProdutoEloquentORM;
 use App\Repositories\Produto\ProdutoRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
@@ -35,6 +41,21 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             ProdutoRepositoryInterface::class,
             ProdutoEloquentORM::class
+        );
+
+        $this->app->bind(
+            MarcaRepositoryInterface::class,
+            MarcaEloquentORM::class
+        );
+
+        $this->app->bind(
+            EstoqueRepositoryInterface::class,
+            EstoqueEloquentORM::class
+        );
+
+        $this->app->bind(
+            FornecedorRepositoryInterface::class,
+            FornecedorEloquentORM::class
         );
     }
 

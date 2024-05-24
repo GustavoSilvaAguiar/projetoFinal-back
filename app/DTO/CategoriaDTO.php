@@ -3,7 +3,7 @@
 namespace App\DTO;
 
 use App\Http\Requests\CategoriaPostUpdateRequest;
-use GuzzleHttp\Psr7\UploadedFile;
+use Illuminate\Http\UploadedFile;
 use Symfony\Component\String\ByteString;
 
 class CategoriaDTO
