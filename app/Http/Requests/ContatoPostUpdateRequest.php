@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ContatoPostUpdateRequest extends FormRequest
@@ -21,8 +22,16 @@ class ContatoPostUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $rules = [];
+
+        /* if($this->method() === 'PUT' || $this->method() === 'PATCH') {
+            $rules['telefone'] = [
+                Rule::unique('contatos')->ignore($this->support ?? $this->id)
+            ];
+            $rules['email'] = [
+                Rule::unique('contatos')->ignore($this->support ?? $this->id)
+            ];
+        } */
+        return $rules;
     }
 }

@@ -6,14 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Marca extends Model
+class Cidade extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'nome',
-        'idusuario'
-    ];
-
     public $timestamps = false;
+
+    public function estado():BelongsTo {
+        return $this->belongsTo(Estado::class, 'idestado');
+    }
 }

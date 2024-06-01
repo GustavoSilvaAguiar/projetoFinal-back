@@ -22,11 +22,9 @@ class UserEloquentORM implements UserRepositoryInterface
     ) {
     }
 
-    public function getAllUsers(Request $request): LengthAwarePaginator//: array
+    public function getAllUsers(Request $request): LengthAwarePaginator //: array
     {
-        //$filter = $request?->filter ? $request->filter : '';
         return $this->model->with('endereco', 'contato')->paginate();
-        //return $this->model->leftJoin('enderecos', 'usuarios.idendereco', '=', 'enderecos.id')->get()->toArray();
     }
     public function getUser(string $id): stdClass | null
     {
@@ -61,12 +59,11 @@ class UserEloquentORM implements UserRepositoryInterface
     public function putUser(UsuarioDTO $dto): stdClass | null
     {
         $user = $this->model->find($dto->id);
-        if(!$user) {
+        if (!$user) {
             return null;
         }
 
         $user->update((array) $dto);
-        //$response = $this->model->update((array) $dto);
 
         return (object) $user->toArray();
     }

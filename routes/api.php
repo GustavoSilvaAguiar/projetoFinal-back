@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Categorias\CategoriaController;
+use App\Http\Controllers\Cidades\CidadeController;
 use App\Http\Controllers\Enderecos\EnderecoController;
 use App\Http\Controllers\Estoque\EstoqueController;
 use App\Http\Controllers\Fornecedores\FornecedorController;
@@ -30,6 +31,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //Categorias
     Route::get('/categorias', [CategoriaController::class, 'getAllCategoria']);
     Route::post('/categorias', [CategoriaController::class, 'postCategoria']);
+    Route::post('/categorias/{id}', [CategoriaController::class, 'putCategoria']);
 
     //Produtos
     Route::get('/produtos', [ProdutoController::class, 'getAllProdutos']);
@@ -40,6 +42,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //Marcas
     Route::get('/marcas', [MarcaController::class, 'getAllMarcas']);
     Route::get('/marcasPaginado', [MarcaController::class, 'getAllMarcasPaginado']);
+    Route::post('/marcas', [MarcaController::class, 'postMarca']);
+    Route::put('/marcas', [MarcaController::class, 'putMarca']);
 
     //Estoque
     Route::get('/estoque', [EstoqueController::class, 'getEstoque']);
@@ -48,4 +52,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //Fornecedores
     Route::get('/fornecedores', [FornecedorController::class, 'getAllFornecedores']);
     Route::get('/fornecedores/paginado', [FornecedorController::class, 'getAllFornecedoresPaginado']);
+    Route::post('/fornecedores', [FornecedorController::class, 'postFornecedor']);
+    Route::put('/fornecedores', [FornecedorController::class, 'putFornecedor']);
 });
+
+//Cidades
+Route::get('/cidades', [CidadeController::class, 'getAllCidades']);

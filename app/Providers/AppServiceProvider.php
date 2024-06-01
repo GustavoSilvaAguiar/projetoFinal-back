@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Repositories\{UserRepositoryInterface, UserEloquentORM};
 use App\Repositories\Categoria\CategoriaEloquentORM;
 use App\Repositories\Categoria\CategoriaRepositoryInterface;
+use App\Repositories\Cidade\CidadeEloquentORM;
+use App\Repositories\Cidade\CidadeRepositoryInterface;
 use App\Repositories\Endereco\{EnderecoRepositoryInterface, EnderecoEloquentORM};
 use App\Repositories\Estoque\EstoqueEloquentORM;
 use App\Repositories\Estoque\EstoqueRepositoryInterface;
@@ -56,6 +58,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             FornecedorRepositoryInterface::class,
             FornecedorEloquentORM::class
+        );
+
+        $this->app->bind(
+            CidadeRepositoryInterface::class,
+            CidadeEloquentORM::class
         );
     }
 

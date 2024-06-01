@@ -16,4 +16,6 @@ class Categoria extends Model
     ];
 
     public $timestamps = false;
+
+    
 }

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CategoriaPostUpdateRequest extends FormRequest
+class FornecedorPostUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,16 +23,15 @@ class CategoriaPostUpdateRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'nome' => 'required'
         ];
 
-        if ($this->method() === 'PUT' || $this->method() === 'PATCH') {
-            $rules['img'] = [
-                 // 'nullable',
-                'image',
-                //'mimes:jpeg,png,jpg,gif',
-                //'max:2048',
-                Rule::unique('categorias')->ignore($this->support ?? $this->id),
+        if($this->method() === 'PUT' || $this->method() === 'PATCH') {
+            /* $rules['telefone'] = [
+                Rule::unique('contato')->ignore($this->support ?? $this->id)
+            ]; */
+            $rules['nome'] = [
+                Rule::unique('fornecedores')->ignore($this->support ?? $this->id)
             ];
         }
         return $rules;
