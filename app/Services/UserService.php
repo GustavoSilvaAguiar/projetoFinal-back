@@ -31,8 +31,8 @@ class UserService
         return $this->repository->postUser($dto);
     }
 
-    public function putUser(UsuarioDTO $dto): stdClass {
-        return $this->repository->putUser($dto);
+    public function putUser(UsuarioDTO $dto, EnderecoDTO $enderecoDTO, ContatoDTO $contatoDTO): stdClass {
+        return $this->repository->putUser($dto, $enderecoDTO, $contatoDTO);
     }
 
     public function postUserComplete(UsuarioDTO $dto, EnderecoDTO $enderecoDTO, ContatoDTO $contatoDTO): stdClass {

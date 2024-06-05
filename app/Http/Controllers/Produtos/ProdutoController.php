@@ -26,6 +26,10 @@ class ProdutoController extends Controller
         return $produtos;
     }
 
+    public function getProdutoDetail(Request $request) {
+        return $this->service->getProdutoDetail($request);
+    }
+
     public function postProduto(ProdutoPostUpdateRequest $request) {
         $response = $this->service->postProduto($request);
         return $response;

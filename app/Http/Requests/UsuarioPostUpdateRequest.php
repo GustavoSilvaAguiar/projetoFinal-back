@@ -28,13 +28,13 @@ class UsuarioPostUpdateRequest extends FormRequest
         ];
 
         if ($this->method() === 'PUT' || $this->method() === 'PATCH') {
-            $rules['cpf'] = [
+            /* $rules['cpf'] = [
                 'required', // 'nullable',
                 'min:11',
                 'max:14',
                 // "unique:supports,subject,{$this->id},id",
                 Rule::unique('usuarios')->ignore($this->support ?? $this->id),
-            ];
+            ]; */
         }
         
         return $rules;

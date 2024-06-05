@@ -5,6 +5,7 @@ namespace App\Repositories\Produto;
 use App\DTO\ProdutoDTO;
 use App\Models\Produto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class ProdutoEloquentORM implements ProdutoRepositoryInterface
 {
@@ -26,7 +27,13 @@ class ProdutoEloquentORM implements ProdutoRepositoryInterface
             !is_null($request->marca) ? $query->whereHas('marca', function ($query) use ($request) {
                 $query->where('id', $request->marca);
             }) : '';
-        })->paginate($perPage = 5);
+        })->paginate();
+    }
+
+    public function getProdutoDetail(Request $request) {
+        $response = $this->model->with('categoria', 'marca')->find($request->id);
+
+        return $response;
     }
 
     public function postProduto(ProdutoDTO $dto)

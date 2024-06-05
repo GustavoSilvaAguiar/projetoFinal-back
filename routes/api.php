@@ -6,6 +6,7 @@ use App\Http\Controllers\Cidades\CidadeController;
 use App\Http\Controllers\Enderecos\EnderecoController;
 use App\Http\Controllers\Estoque\EstoqueController;
 use App\Http\Controllers\Fornecedores\FornecedorController;
+use App\Http\Controllers\InfoNutricionais\InfoNutricionalController;
 use App\Http\Controllers\Marcas\MarcaController;
 use App\Http\Controllers\Produtos\ProdutoController;
 use App\Http\Controllers\Usuarios\UserController;
@@ -36,8 +37,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //Produtos
     Route::get('/produtos', [ProdutoController::class, 'getAllProdutos']);
     Route::get('/produtos/nopage', [ProdutoController::class, 'getAllProdutosNoPage']);
+    Route::get('/produtos/details/{id}', [ProdutoController::class, 'getProdutoDetail']);
     Route::post('/produtos', [ProdutoController::class, 'postProduto']);
     Route::put('/produtos', [ProdutoController::class, 'putProduto']);
+    //Produtos - Info Nutricional
+    Route::get('/produtos/info-nutricional/{id}', [InfoNutricionalController::class, 'getInfoNutricional']);
+    Route::post('/produtos/info-nutricional', [InfoNutricionalController::class , 'postInfoNutricional']);
+    Route::put('/produtos/info-nutricional', [InfoNutricionalController::class , 'putInfoNutricional']);
 
     //Marcas
     Route::get('/marcas', [MarcaController::class, 'getAllMarcas']);

@@ -10,4 +10,5 @@ interface ProdutoRepositoryInterface {
     public function postProduto(ProdutoDTO $dto);
     public function putProduto(ProdutoDTO $dto);
     public function getAllProdutosNoPagination();
+    public function getProdutoDetail(Request $request);
 }

@@ -23,16 +23,13 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        //return $request;
         $users = $this->service->getAllUsers($request);
-        //$users = Usuario::paginate($perPage = 20);
 
         return $users;
     }
 
     public function getUser(string $id)
     {
-        //dd($id);
         $user = $this->service->getUser($id);
 
         return $user;
@@ -45,9 +42,9 @@ class UserController extends Controller
         return $response;
     }
 
-    public function putUser(UsuarioPostUpdateRequest $request)
+    public function putUser(UsuarioPostUpdateRequest $request, EnderecoPostUpdateRequest $enderecoRequest, ContatoPostUpdateRequest $contatoRequest)
     {
-        $response = $this->service->putUser(UsuarioDTO::makeFromRequest($request));
+        $response = $this->service->putUser(UsuarioDTO::makeFromRequest($request), EnderecoDTO::makeFromRequest($enderecoRequest), ContatoDTO::makeFromRequest($contatoRequest));
 
         return $response;
     }

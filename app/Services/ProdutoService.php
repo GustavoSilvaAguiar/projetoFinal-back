@@ -24,6 +24,10 @@ class ProdutoService
         return $this->repository->getAllProdutosNoPagination();
     }
 
+    public function getProdutoDetail(Request $request) {
+        return $this->repository->getProdutoDetail($request);
+    }
+
     public function postProduto(ProdutoPostUpdateRequest $request) {
         return $this->repository->postProduto(ProdutoDTO::makeFromRequest($request));
     }

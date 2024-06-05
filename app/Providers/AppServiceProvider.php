@@ -12,6 +12,8 @@ use App\Repositories\Estoque\EstoqueEloquentORM;
 use App\Repositories\Estoque\EstoqueRepositoryInterface;
 use App\Repositories\Fornecedor\FornecedorEloquentORM;
 use App\Repositories\Fornecedor\FornecedorRepositoryInterface;
+use App\Repositories\InfoNutricional\InfoNutricionalEloquentORM;
+use App\Repositories\InfoNutricional\InfoNutricionalRepositoryInterface;
 use App\Repositories\Marca\MarcaEloquentORM;
 use App\Repositories\Marca\MarcaRepositoryInterface;
 use App\Repositories\Produto\ProdutoEloquentORM;
@@ -63,6 +65,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             CidadeRepositoryInterface::class,
             CidadeEloquentORM::class
+        );
+
+        $this->app->bind(
+            InfoNutricionalRepositoryInterface::class,
+            InfoNutricionalEloquentORM::class
         );
     }
 
