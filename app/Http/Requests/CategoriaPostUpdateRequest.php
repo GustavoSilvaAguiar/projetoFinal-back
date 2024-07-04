@@ -23,17 +23,23 @@ class CategoriaPostUpdateRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
+            'nome' => 'required',
             'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ];
 
         if ($this->method() === 'PUT' || $this->method() === 'PATCH') {
-            $rules['img'] = [
-                 // 'nullable',
-                'image',
-                //'mimes:jpeg,png,jpg,gif',
-                //'max:2048',
+            $rules['nome'] = [
+                'required',
                 Rule::unique('categorias')->ignore($this->support ?? $this->id),
             ];
+            /* $rules['img'] = [
+                'nullable',
+
+                'image',
+                'mimes:jpeg,png,jpg,gif',
+                'max:2048',
+                Rule::unique('categorias')->ignore($this->support ?? $this->id),
+            ]; */
         }
         return $rules;
     }

@@ -60,27 +60,6 @@ class CategoriaEloquentORM implements CategoriaRepositoryInterface
         }
     }
 
-    /*   public function putCategoria(CategoriaDTO $dto)
-    {
-        $categoria = $this->model->find($dto->id);
-        if (!$categoria) {
-            return null;
-        }
-
-        $categoria->nome = $dto->nome;
-        $categoria->idusuario = $dto->idusuario;
-        
-        if ($categoria->img && $dto->file_img) {
-            $this->deleteOldPicture($categoria->img);
-            $this->saveCategoriaPicture($categoria, $dto->file_img);
-        }
-
-        if(!$categoria->img && $dto->file_img) {
-            $this->saveCategoriaPicture($categoria, $dto->file_img);
-        }
-
-        return (object) $categoria->toArray();
-    } */
 
     public function putCategoria(CategoriaDTO $dto)
     {
@@ -96,10 +75,12 @@ class CategoriaEloquentORM implements CategoriaRepositoryInterface
         // Exclui a imagem existente, se houver
         if ($categoria->img) {
             $this->deleteOldPicture($categoria->img);
+
+            // Salva a nova imagem ou executa qualquer lógica necessária
+            $this->saveCategoriaPicture($categoria, $dto->img);
         }
 
-        // Salva a nova imagem ou executa qualquer lógica necessária
-        $this->saveCategoriaPicture($categoria, $dto->img);
+
 
 
         // Salva as alterações no objeto $categoria
