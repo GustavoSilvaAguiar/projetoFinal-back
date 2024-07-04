@@ -29,4 +29,10 @@ class CategoriaController extends Controller
         $response = $this->service->postCategoria(CategoriaDTO::makeFromRequest($request));
         return $response;
     }
+
+    public function putCategoria(CategoriaPostUpdateRequest $request) {
+        $response = $this->service->putCategoria(CategoriaDTO::makeFromRequest($request));
+
+        return $response;
+    }
 }

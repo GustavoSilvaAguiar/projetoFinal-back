@@ -22,4 +22,8 @@ class CategoriaService {
     public function postCategoria(CategoriaDTO $dto): stdClass | null {
         return $this->repository->postCategoria($dto);
     }
+
+    public function putCategoria(CategoriaDTO $dto) {
+        return $this->repository->putCategoria($dto);
+    }
 }

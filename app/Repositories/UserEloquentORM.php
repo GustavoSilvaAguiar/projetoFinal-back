@@ -22,12 +22,11 @@ class UserEloquentORM implements UserRepositoryInterface
     ) {
     }
 
-    public function getAllUsers(Request $request): LengthAwarePaginator//: array
+    public function getAllUsers(Request $request): LengthAwarePaginator
     {
-        //$filter = $request?->filter ? $request->filter : '';
         return $this->model->with('endereco', 'contato')->paginate();
-        //return $this->model->leftJoin('enderecos', 'usuarios.idendereco', '=', 'enderecos.id')->get()->toArray();
     }
+
     public function getUser(string $id): stdClass | null
     {
         $response = (object) $this->model->with('endereco', 'contato')->find($id)->toArray();
@@ -58,15 +57,25 @@ class UserEloquentORM implements UserRepositoryInterface
         return (object) $response->toArray();
     }
 
-    public function putUser(UsuarioDTO $dto): stdClass | null
+    public function putUser(UsuarioDTO $dto, EnderecoDTO $enderecoDTO, ContatoDTO $contatoDTO): stdClass | null
     {
         $user = $this->model->find($dto->id);
-        if(!$user) {
+        if (!$user) {
             return null;
         }
 
+        if($user->idendereco) {
+            $contato = $this->enderecoModel->find($user->idendereco);
+            $contato->update((array) $enderecoDTO);
+        }
+
+        if ($user->idcontato) {
+            $contato = $this->contatoModel->find($user->idcontato);
+            $contato->update((array) $contatoDTO);
+        }
+
         $user->update((array) $dto);
-        //$response = $this->model->update((array) $dto);
+
 
         return (object) $user->toArray();
     }

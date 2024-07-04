@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class ContatoPostUpdateRequest extends FormRequest
+class FornecedorPostUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,16 +22,18 @@ class ContatoPostUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = [];
+        $rules = [
+            'nome' => 'required'
+        ];
 
-        /* if($this->method() === 'PUT' || $this->method() === 'PATCH') {
-            $rules['telefone'] = [
-                Rule::unique('contatos')->ignore($this->support ?? $this->id)
+        if($this->method() === 'PUT' || $this->method() === 'PATCH') {
+            /* $rules['telefone'] = [
+                Rule::unique('contato')->ignore($this->support ?? $this->id)
+            ]; */
+            $rules['nome'] = [
+                Rule::unique('fornecedores')->ignore($this->support ?? $this->id)
             ];
-            $rules['email'] = [
-                Rule::unique('contatos')->ignore($this->support ?? $this->id)
-            ];
-        } */
+        }
         return $rules;
     }
 }

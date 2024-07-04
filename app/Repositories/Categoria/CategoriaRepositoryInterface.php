@@ -9,4 +9,5 @@ use stdClass;
 interface CategoriaRepositoryInterface {
     public function getAllCategorias();
     public function postCategoria(CategoriaDTO $dto): stdClass | null;
+    public function putCategoria(CategoriaDTO $dto);
 }

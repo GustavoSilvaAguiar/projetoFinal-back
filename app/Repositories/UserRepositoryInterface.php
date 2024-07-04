@@ -14,6 +14,6 @@ interface UserRepositoryInterface
     public function getAllUsers(Request $request): LengthAwarePaginator;
     public function getUser(string $id): stdClass | null;
     public function postUser(UsuarioDTO $dto): stdClass;
-    public function putUser(UsuarioDTO $dto): stdClass | null;
+    public function putUser(UsuarioDTO $dto, EnderecoDTO $enderecoDTO, ContatoDTO $contatoDTO): stdClass | null;
     public function postUserComplete(UsuarioDTO $dto, EnderecoDTO $enderecoDTO, ContatoDTO $contatoDTO): stdClass;
 }
