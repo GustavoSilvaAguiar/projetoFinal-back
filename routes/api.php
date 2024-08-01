@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Categorias\CategoriaController;
+use App\Http\Controllers\Charts\ChartsController;
 use App\Http\Controllers\Cidades\CidadeController;
 use App\Http\Controllers\Enderecos\EnderecoController;
 use App\Http\Controllers\Estoque\EstoqueController;
@@ -60,6 +61,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/fornecedores/paginado', [FornecedorController::class, 'getAllFornecedoresPaginado']);
     Route::post('/fornecedores', [FornecedorController::class, 'postFornecedor']);
     Route::put('/fornecedores', [FornecedorController::class, 'putFornecedor']);
+
+    //Charts
+    Route::get('/charts/mais-vendidos', [ChartsController::class, 'getBestSellers']);
+    Route::get('/charts/mais-vendidos-categoria', [ChartsController::class, 'getBestCategorias']);
 });
 
 //Cidades

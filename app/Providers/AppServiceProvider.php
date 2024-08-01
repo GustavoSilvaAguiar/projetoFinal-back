@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Repositories\{UserRepositoryInterface, UserEloquentORM};
 use App\Repositories\Categoria\CategoriaEloquentORM;
 use App\Repositories\Categoria\CategoriaRepositoryInterface;
+use App\Repositories\Charts\ChartsEloquentORM;
+use App\Repositories\Charts\ChartsRepositoryInterface;
 use App\Repositories\Cidade\CidadeEloquentORM;
 use App\Repositories\Cidade\CidadeRepositoryInterface;
 use App\Repositories\Endereco\{EnderecoRepositoryInterface, EnderecoEloquentORM};
@@ -70,6 +72,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             InfoNutricionalRepositoryInterface::class,
             InfoNutricionalEloquentORM::class
+        );
+
+        $this->app->bind(
+            ChartsRepositoryInterface::class,
+            ChartsEloquentORM::class
         );
     }
 
